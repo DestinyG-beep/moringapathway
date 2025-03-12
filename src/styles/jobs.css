@@ -1,0 +1,44 @@
+.application-form {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f4f4f4;
+}
+
+.application-form .form-group {
+  margin-bottom: 10px;
+}
+
+.application-form input,
+.application-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submit-application-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-application-button:hover {
+  background-color: #0056b3;
+}
+
+.save-button.saved {
+  background-color: #28a745;
+  color: white;
+}
+
+.save-button.saved:hover {
+  background-color: #218838;
+}
+

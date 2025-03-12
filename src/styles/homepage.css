@@ -1,0 +1,191 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* HomePage Container */
+  .homepage {
+    
+    text-align: center;
+    padding: 50px 20px;
+  
+  }
+  
+  /* Hero Section */
+  .hero {
+    background: url('../assets/moringa-logo.png') no-repeat center center/cover;
+    opacity: 0.9;
+    
+    padding: 6rem 2rem;
+    border-radius: 5px;
+    margin-bottom: 30px;
+  }
+  
+  .hero img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    margin: 1rem 0;
+  }
+  
+  .hero p {
+    font-size: 1.25rem;
+    margin: 1rem 0;
+  }
+  
+  .cta-button {
+    padding: 0.75rem 1.5rem;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .cta-button:hover {
+    background: #ffdb4d;
+  }
+  
+  /* How It Works Section */
+  
+  
+  .how-it-works {
+    padding: 2rem;
+    background-color: #f8f9fa;
+    margin: 40px 0;
+  }
+  
+  .how-it-works h2 {
+    font-size: 2rem;
+    color: #0056b3;
+    margin-bottom: 10px;
+  }
+  
+  .how-it-works p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .steps-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .step {
+    max-width: 200px;
+    margin: 1rem;
+    background: #fff;
+    border-radius: 10px;
+    width: 220px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .step img {
+    max-width: 100%;
+    height: auto;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+  
+  .step h3 {
+    font-size: 1.2rem;
+    color: #0056b3;
+    margin-bottom: 10px;
+  }
+  
+  .step p {
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  /* Features Section */
+  .features {
+    padding: 2rem;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+  
+  .feature {
+    margin: 1rem 0;
+    background: white;
+    padding: 20px;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px; /* optional for spacing between feature cards */
+  }
+  
+  .feature h2 {
+    color: #0056b3;
+    margin-bottom: 10px;
+  }
+  
+  /* Company cards section styles */
+  .company-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 2rem;
+    background-color: #f8f9fa;
+  }
+  
+  .company-card {
+    width: 306px;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 3px 8px rgba(48, 150, 137, 0.13);
+  }
+  
+  .card-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(48, 150, 137, 0.15);
+  }
+  
+  .card-icon img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: black;
+  }
+  
+  .card-description {
+    width: 230px;
+    font-size: 1rem;
+    color: #333;
+    text-align: center;
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

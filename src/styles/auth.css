@@ -1,0 +1,116 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 64px);
+    padding: 2rem;
+    background-color: #f9fafb;
+  }
+  
+  .auth-form-container {
+    width: 100%;
+    max-width: 450px;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+  }
+  
+  .auth-form-container h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #0f2a5c;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  
+  .auth-subtitle {
+    text-align: center;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+  }
+  
+  .auth-error {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .auth-form {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  .auth-button {
+    width: 100%;
+    background-color: #f97316;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .auth-button:hover {
+    background-color: #ea580c;
+  }
+  
+  .auth-button:disabled {
+    background-color: #f97316;
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  .auth-redirect {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+  
+  .auth-link {
+    color: #f97316;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  
+  .auth-link:hover {
+    text-decoration: underline;
+  }
+  
+  .auth-demo-accounts {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 1rem;
+    margin-top: 1rem;
+  }
