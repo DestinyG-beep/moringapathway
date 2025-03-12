@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
 import '../styles/payment.css'; // Import the CSS for styling
+import config from '../config';
 
 const Payment = () => {
   const [amount, setAmount] = useState('');
 
   const handleMpesaPayment = async () => {
     try {
-      const { data } = await axios.post('http://127.0.0.1:5000/payments/mpesa', {
+      const { data } = await axios.post(`${config.backendUrl}/payments/mpesa`, {
         phone_number: "254712345678",
         amount: amount,
       });
@@ -21,7 +22,7 @@ const Payment = () => {
 
   const handleStripePayment = async (token) => {
     try {
-      await axios.post('http://127.0.0.1:5000/payments/stripe', {
+      await axios.post(`${config.backendUrl}/payments/stripe`, {
         amount: amount,
         payment_method: token.id
       });
@@ -34,7 +35,7 @@ const Payment = () => {
 
   const handlePaypalPayment = async () => {
     try {
-      const { data } = await axios.post('http://127.0.0.1:5000/payments/paypal', {
+      const { data } = await axios.post(`${config.backendUrl}/payments/paypal`, {
         amount: amount,
       });
       window.location.href = data.links[1].href; // Redirect to PayPal

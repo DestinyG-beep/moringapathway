@@ -1,45 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import config from '../../config';
 
 const Resources = () => {
-  const [resources] = useState([
-    {
-      id: 1,
-      title: 'Resume Writing Guide',
-      description: 'Learn how to craft a professional resume that stands out to employers.',
-      type: 'Guide',
-      isPremium: false,
-    },
-    {
-      id: 2,
-      title: 'Interview Preparation',
-      description: 'Prepare for common interview questions and techniques.',
-      type: 'Guide',
-      isPremium: false,
-    },
-    {
-      id: 3,
-      title: 'Technical Interview Questions',
-      description: 'Common technical questions for software development roles with detailed answers.',
-      type: 'Template',
-      isPremium: true,
-    },
-  ]);
+  const [resources, setResources] = useState([]);
+
+  useEffect(() => {
+    const fetchResources = async () => {
+      try {
+        const response = await axios.get(`${config.backendUrl}/get_job_resources`);
+        setResources(response.data);
+      } catch (error) {
+        console.error('Error fetching resources:', error);
+      }
+    };
+
+    fetchResources();
+  }, []);
 
   return (
-    <div className="resources-page">
+    <div className="resources">
       <h1>Resources</h1>
       <p>Access career resources and guides.</p>
 
       <div className="resources-list">
-        {resources.map((resource) => (
-          <div key={resource.id} className="resource-card">
-            <h2>{resource.title}</h2>
-            <p>{resource.description}</p>
-            <p>Type: {resource.type}</p>
-            <p>{resource.isPremium ? 'Premium' : 'Free'}</p>
-            <button>Access Resource</button>
-          </div>
-        ))}
+        {resources.length === 0 ? (
+          <p>No resources available.</p>
+        ) : (
+          resources.map((resource) => (
+            <div key={resource.id} className="resource-card">
+              <h2>{resource.title}</h2>
+              <p>{resource.description}</p>
+              <p>Type: {resource.type}</p>
+              <p>Size: {resource.size}</p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

@@ -1,36 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import config from '../../config';
 
 const SavedJobs = () => {
-  const [savedJobs, setSavedJobs] = useState([
-    {
-      id: 1,
-      jobTitle: 'Software Engineer',
-      company: 'Tech Corp',
-      location: 'Remote',
-      type: 'Full-time',
-      dateSaved: '2025-02-15',
-    },
-    {
-      id: 2,
-      jobTitle: 'Frontend Developer',
-      company: 'Web Solutions',
-      location: 'New York, NY',
-      type: 'Part-time',
-      dateSaved: '2025-02-10',
-    },
-    {
-      id: 3,
-      jobTitle: 'Backend Developer',
-      company: 'Data Systems',
-      location: 'San Francisco, CA',
-      type: 'Full-time',
-      dateSaved: '2025-01-25',
-    },
-  ]);
+  const [savedJobs, setSavedJobs] = useState([]);
 
-  // Function to remove a job from savedJobs
-  const handleRemoveJob = (id) => {
-    setSavedJobs(savedJobs.filter(job => job.id !== id));
+  useEffect(() => {
+    const fetchSavedJobs = async () => {
+      try {
+        const response = await axios.get(`${config.backendUrl}/get_saved_jobs`);
+        setSavedJobs(response.data);
+      } catch (error) {
+        console.error('Error fetching saved jobs:', error);
+      }
+    };
+
+    fetchSavedJobs();
+  }, []);
+
+  const handleRemoveJob = async (id) => {
+    try {
+      await axios.delete(`${config.backendUrl}/delete_saved_job/${id}`);
+      setSavedJobs(savedJobs.filter(job => job.id !== id));
+    } catch (error) {
+      console.error('Error removing saved job:', error);
+    }
   };
 
   return (
@@ -44,11 +38,11 @@ const SavedJobs = () => {
         ) : (
           savedJobs.map((job) => (
             <div key={job.id} className="job-card">
-              <h2>{job.jobTitle}</h2>
-              <p>{job.company}</p>
+              <h2>{job.title}</h2>
+              <p>{job.employer}</p>
               <p>{job.location}</p>
-              <p>{job.type}</p>
-              <p>Date Saved: {job.dateSaved}</p>
+              <p>{job.job_type}</p>
+              <p>Date Saved: {new Date(job.date_posted).toLocaleDateString()}</p>
               <button>View Details</button>
               <button onClick={() => handleRemoveJob(job.id)}>Remove</button>
             </div>

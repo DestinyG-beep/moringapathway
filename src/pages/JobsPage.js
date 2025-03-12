@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import config from '../config';
 import { MapPin, Clock, Star } from 'lucide-react';
 import "../styles/jobs.css";
 import JobDetailsModal from '../components/JobDetailsModal';
@@ -8,63 +10,115 @@ import JobDetailsModal from '../components/JobDetailsModal';
  * @typedef {Object} Job
  * @property {number} id
  * @property {string} title
- * @property {string} company
+ * @property {string} description
  * @property {string} location
- * @property {string} type
- * @property {string} posted
- * @property {string} logo
+ * @property {number} salary_min
+ * @property {number} salary_max
+ * @property {string} job_type
+ * @property {string} skills_required
+ * @property {string} benefits
+ * @property {string} application_deadline
+ * @property {string} employer
+ * @property {string} employer_email
+ * @property {string} employer_phone
+ * @property {string} date_posted
+ * @property {boolean} is_active
  */
 
 const JobsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [jobs, setJobs] = useState([]);
   const [salary, setSalary] = useState(50000);
   const [selectedJob, setSelectedJob] = useState(null);
-  
-  // Mock data for jobs
-  /** @type {Job[]} */
-  const mockJobs = [
+
+  // Demo data for jobs
+  const demoJobs = [
     {
       id: 1,
-      title: "Regional Certified Facilitator",
-      company: "Moringa School",
-      location: "Nairobi, Kenya",
-      type: "Full-time",
-      posted: "2 days ago",
-      logo: "RC"
+      title: "Software Engineer",
+      description: "We are looking for a skilled software engineer with expertise in Python, JavaScript, and cloud technologies.",
+      location: "Remote",
+      salary_min: 90000,
+      salary_max: 120000,
+      job_type: "Full-time",
+      skills_required: "Python, JavaScript, Cloud Computing",
+      benefits: "Health insurance, Paid vacation, Retirement plan",
+      application_deadline: "2025-04-05T03:53:06Z",
+      employer: "Tech Corp",
+      employer_email: "hr@techcorp.com",
+      employer_phone: "+1234567890",
+      date_posted: "2025-02-15T03:53:06Z",
+      is_active: true
     },
     {
       id: 2,
-      title: "Select A Brand Director",
-      company: "Moringa",
-      location: "Nairobi",
-      type: "Full-time",
-      posted: "3 days ago",
-      logo: "SA"
+      title: "Frontend Developer",
+      description: "We are looking for a skilled frontend developer with expertise in React and CSS.",
+      location: "New York, NY",
+      salary_min: 80000,
+      salary_max: 100000,
+      job_type: "Part-time",
+      skills_required: "React, CSS, JavaScript",
+      benefits: "Health insurance, Paid vacation, Retirement plan",
+      application_deadline: "2025-04-05T03:53:06Z",
+      employer: "Web Solutions",
+      employer_email: "hr@websolutions.com",
+      employer_phone: "+1234567890",
+      date_posted: "2025-02-10T03:53:06Z",
+      is_active: true
     },
     {
       id: 3,
-      title: "Tanzania Partner Facilitator",
-      company: "Moringa",
-      location: "Tanzania",
-      type: "Full-time",
-      posted: "5 days ago",
-      logo: "TP"
-    },
-    {
-      id: 4,
-      title: "Senior Software Developer",
-      company: "Moringa Tech",
-      location: "Remote",
-      type: "Full-time",
-      posted: "1 day ago",
-      logo: "MT"
+      title: "Backend Developer",
+      description: "We are looking for a skilled backend developer with expertise in Node.js and databases.",
+      location: "San Francisco, CA",
+      salary_min: 85000,
+      salary_max: 110000,
+      job_type: "Full-time",
+      skills_required: "Node.js, Databases, JavaScript",
+      benefits: "Health insurance, Paid vacation, Retirement plan",
+      application_deadline: "2025-04-05T03:53:06Z",
+      employer: "Data Systems",
+      employer_email: "hr@datasystems.com",
+      employer_phone: "+1234567890",
+      date_posted: "2025-01-25T03:53:06Z",
+      is_active: true
     }
   ];
 
-  // Filter jobs based on search term
-  const filteredJobs = mockJobs.filter(job => 
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await axios.get(`${config.backendUrl}/get_jobs`);
+        setJobs([...demoJobs, ...response.data]);
+      } catch (error) {
+        console.error("Failed to fetch jobs:", error);
+        setJobs(demoJobs);
+      }
+    };
+
+    fetchJobs();
+  }, []);
+
+  const handleSaveJob = (job) => {
+    const savedJobs = JSON.parse(localStorage.getItem('savedJobs')) || [];
+    if (!savedJobs.find(savedJob => savedJob.id === job.id)) {
+      savedJobs.push(job);
+      localStorage.setItem('savedJobs', JSON.stringify(savedJobs));
+    }
+  };
+
+  const handleApplyJob = (job) => {
+    const appliedJobs = JSON.parse(localStorage.getItem('appliedJobs')) || [];
+    if (!appliedJobs.find(appliedJob => appliedJob.id === job.id)) {
+      appliedJobs.push(job);
+      localStorage.setItem('appliedJobs', JSON.stringify(appliedJobs));
+    }
+  };
+
+  const filteredJobs = jobs.filter(job => 
     job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    job.company.toLowerCase().includes(searchTerm.toLowerCase())
+    job.employer.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -129,7 +183,7 @@ const JobsPage = () => {
             <option value="last7days">Last 7 days</option>
             <option value="last14days">Last 14 days</option>
             <option value="last30days">Last 30 days</option>
-            <option value="ealier">ealier</option>
+            <option value="ealier">Earlier</option>
           </select>
         </div>
 
@@ -156,30 +210,30 @@ const JobsPage = () => {
                 <div className="flex items-start space-x-4">
                   <div className="bg-gray-100 p-3 rounded-lg">
                     <div className="w-10 h-10 flex items-center justify-center">
-                      <span className="font-bold text-gray-500">{job.logo}</span>
+                      <span className="font-bold text-gray-500">{job.employer.charAt(0)}</span>
                     </div>
                   </div>
                   <div>
                     <h3 className="job-title">{job.title}</h3>
-                    <p className="job-company">{job.company}</p>
+                    <p className="job-company">{job.employer}</p>
                     <div className="job-details">
                       <span className="job-detail">
                         <MapPin size={14} className="mr-1" /> {job.location}
                       </span>
                       <span className="job-detail">
-                        <Clock size={14} className="mr-1" /> {job.type}
+                        <Clock size={14} className="mr-1" /> {job.job_type}
                       </span>
                       <span className="job-detail">
-                        <Star size={14} className="mr-1" /> Posted {job.posted}
+                        <Star size={14} className="mr-1" /> Posted {new Date(job.date_posted).toLocaleDateString()}
                       </span>
                     </div>
                   </div>
                 </div>
                 <div className="mt-4 md:mt-0 flex items-center space-x-4">
-                  <button className="apply-button">
+                  <button className="apply-button" onClick={() => handleApplyJob(job)}>
                     Apply Now
                   </button>
-                  <button className="save-button">
+                  <button className="save-button" onClick={() => handleSaveJob(job)}>
                     Save Job
                   </button>
                 </div>

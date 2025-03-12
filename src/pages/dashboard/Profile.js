@@ -1,86 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import config from '../../config';
 import { useAuth } from '../../contexts/AuthContext';
 
 const Profile = () => {
   const { user } = useAuth();
-  const [name, setName] = useState(user?.name || '');
-  const [email, setEmail] = useState(user?.email || '');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [profile, setProfile] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setError('');
-    setSuccess('');
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await axios.get(`${config.backendUrl}/get_user?user_id=${user.id}`);
+        setProfile(response.data);
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+      }
+    };
 
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-
-    // Simulate updating user profile
-    setTimeout(() => {
-      setSuccess('Profile updated successfully');
-    }, 1000);
-  };
+    fetchProfile();
+  }, [user.id]);
 
   return (
-    <div className="profile-page">
+    <div className="profile">
       <h1>Profile</h1>
-      <p>View and edit your profile information.</p>
-      
-      {error && <div className="error-message">{error}</div>}
-      {success && <div className="success-message">{success}</div>}
-      
-      <form onSubmit={handleSubmit} className="profile-form">
-        <div className="form-group">
-          <label htmlFor="name">Full Name</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
+      {profile ? (
+        <div className="profile-details">
+          <p>Username: {profile.username}</p>
+          <p>Email: {profile.email}</p>
+          <p>Phone: {profile.phone}</p>
+          <p>Role: {profile.role}</p>
         </div>
-        
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Leave blank to keep the same"
-          />
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Leave blank to keep the same"
-          />
-        </div>
-        
-        <button type="submit" className="profile-button">Update Profile</button>
-      </form>
+      ) : (
+        <p>Loading profile...</p>
+      )}
     </div>
   );
 };
