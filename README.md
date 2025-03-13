@@ -16,7 +16,7 @@ This project is the front-end for the Moringa Pathway application, which helps u
 the app is live on https://moringa-pathway-front-end-tau.vercel.app/
 ## Backend Server
 
-The backend server for this application is deployed on Render and can be accessed at: [https://jwt-8im5.onrender.com](https://jwt-8im5.onrender.com)
+The backend server for this application is deployed on Render and can be accessed at: [https://jwt-1uab.onrender.com](https://jwt-8im5.onrender.com)
 
 ## Available Scripts
 
@@ -57,3 +57,5 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
    ```bash
    git clone https://github.com/Aleph-Phoebe/Moringa-Pathway-front-end.git
    cd Moringa-Pathway-front-end
+
+backend repo https://github.com/Manu88x/jwt.git
