@@ -20,7 +20,7 @@ const ResourcesPage = () => {
       title: 'Resume Guide',
       description: 'A comprehensive guide to creating a professional resume.',
       type: 'guide',
-      url: "https://www.myperfectcoverletter.com/lp/mpcrwzlp07.aspx?utm_source=google&utm_medium=sem&utm_campaign=20498128053&utm_term=cover%20letter%20template&network=g&device=c&adposition=&adgroupid=152552290029&placement=&adid=671887239766&gad_source=1&gclid=EAIaIQobChMIi_3yyveGjAMVTV1yCh3rtByMEAAYASAAEgItU_D_BwE",
+      url: "https://www.resumehelp.com/?utm_source=google&utm_campaign=317497369&utm_medium=cpc&utm_keyword=resume%20guide&adid=64278435769&utm_source=google&utm_medium=cpc&utm_keyword=resume%20guide&gad_source=1&gclid=EAIaIQobChMItremt_-GjAMViJJoCR35fhP9EAAYASAAEgKYL_D_BwE",
       isPremium: false,
     },
     {
@@ -44,7 +44,7 @@ const ResourcesPage = () => {
       title: 'Job Search Strategies',
       description: 'Effective strategies for finding job opportunities.',
       type: 'guide',
-      url: "https://www.linkedin.com/pulse/winning-job-search-strategy-dan-mian",
+      url: "https://www.indeed.com/career-advice/finding-a-job/job-searching-strategies",
       isPremium: false,
     },
     {
