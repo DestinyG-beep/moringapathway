@@ -13,10 +13,11 @@ This project is the front-end for the Moringa Pathway application, which helps u
 - HTML
 
 ## Frontend
-the app is live on https://moringa-pathway-front-end-tau.vercel.app/
+The app is live on [https://moringa-pathway-front-end-tau.vercel.app/](https://moringa-pathway-front-end-tau.vercel.app/)
+
 ## Backend Server
 
-The backend server for this application is deployed on Render and can be accessed at: [https://jwt-1uab.onrender.com](https://jwt-8im5.onrender.com)
+The backend server for this application is deployed on Render and can be accessed at: [https://jwt-1uab.onrender.com](https://jwt-1uab.onrender.com)
 
 ## Available Scripts
 
@@ -29,7 +30,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
 
 ### `npm run build`
 
@@ -57,5 +57,59 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
    ```bash
    git clone https://github.com/Aleph-Phoebe/Moringa-Pathway-front-end.git
    cd Moringa-Pathway-front-end
+   ```
 
-backend repo https://github.com/Manu88x/jwt.git
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+
+## Application Functions
+
+### User Authentication
+
+- **Login**: Users can log in to access their personalized dashboard.
+- **Register**: New users can create an account to start using the application.
+
+### Profile Management
+
+- **View Profile**: Users can view their profile information.
+- **Edit Profile**: Users can update their profile details, including username, email, phone number, and password.
+
+### Job Management
+
+- **View Jobs**: Users can browse available job listings.
+- **Search Jobs**: Users can search for jobs by title or company.
+- **Filter Jobs**: Users can filter jobs by category, job type, experience level, date posted, and salary range.
+- **Save Jobs**: Users can save jobs to view later.
+- **Apply for Jobs**: Users can apply for jobs directly from the application.
+
+### Saved Jobs
+
+- **View Saved Jobs**: Users can view and manage their saved jobs.
+- **Remove Saved Jobs**: Users can remove jobs from their saved list.
+
+### Job Applications
+
+- **View Job Applications**: Users can view and manage their job applications.
+- **Remove Job Applications**: Users can remove job applications from their list.
+
+### Premium Content
+
+- **Access Premium Resources**: Premium users can access exclusive resources such as guides, templates, and interview questions.
+- **View Resource Details**: Users can view detailed information about each resource.
+- **Find Out More**: Users can navigate to external links for more information about the resources.
+
+### Admin Management
+
+- **Manage Users**: Admins can view, edit, and delete user accounts.
+- **Edit User Roles**: Admins can update user roles, including promoting users to admin.
+
+## Backend Repository
+
+The backend repository for this application can be found at: [https://github.com/Manu88x/jwt.git](https://github.com/Manu88x/jwt.git)
