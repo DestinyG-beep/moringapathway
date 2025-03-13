@@ -34,7 +34,7 @@ const SavedJobs = () => {
               <p>{job.location}</p>
               <p>{job.job_type}</p>
               <p>Date Saved: {new Date(job.date_posted).toLocaleDateString()}</p>
-              <button>View Details</button>
+              
               <button onClick={() => handleRemoveJob(job.id)}>Remove</button>
             </div>
           ))

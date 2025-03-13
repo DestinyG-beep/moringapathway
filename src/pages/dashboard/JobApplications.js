@@ -35,7 +35,7 @@ const JobApplications = () => {
               <p>{application.location}</p>
               <p>{application.job_type}</p>
               <p>Date Applied: {new Date(application.date_posted).toLocaleDateString()}</p>
-              <button>View Details</button>
+              
               <button onClick={() => handleRemoveApplication(application.id)}>Remove</button>
             </div>
           ))
