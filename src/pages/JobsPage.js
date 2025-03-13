@@ -28,8 +28,12 @@ import JobDetailsModal from '../components/JobDetailsModal';
 const JobsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [jobs, setJobs] = useState([]);
-  const [salary, setSalary] = useState(50000);
+  const [salary, setSalary] = useState('');
   const [selectedJob, setSelectedJob] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [jobType, setJobType] = useState([]);
+  const [experienceLevel, setExperienceLevel] = useState('');
+  const [datePosted, setDatePosted] = useState('');
 
   // Demo data for jobs
   const demoJobs = [
@@ -116,10 +120,42 @@ const JobsPage = () => {
     }
   };
 
-  const filteredJobs = jobs.filter(job => 
-    job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    job.employer.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleCategoryChange = (category) => {
+    setActiveCategory(category);
+  };
+
+  const handleJobTypeChange = (type) => {
+    setJobType((prev) => {
+      if (prev.includes(type)) {
+        return prev.filter((t) => t !== type);
+      } else {
+        return [...prev, type];
+      }
+    });
+  };
+
+  const handleExperienceLevelChange = (e) => {
+    setExperienceLevel(e.target.value);
+  };
+
+  const handleDatePostedChange = (e) => {
+    setDatePosted(e.target.value);
+  };
+
+  const handleSalaryChange = (e) => {
+    setSalary(e.target.value);
+  };
+
+  const filteredJobs = jobs.filter(job => {
+    const matchesSearchTerm = job.title.toLowerCase().includes(searchTerm.toLowerCase()) || job.employer.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = activeCategory === 'all' || job.type === activeCategory;
+    const matchesJobType = jobType.length === 0 || jobType.includes(job.job_type.toLowerCase());
+    const matchesExperienceLevel = experienceLevel === '' || job.experience_level === experienceLevel;
+    const matchesDatePosted = datePosted === '' || new Date(job.date_posted) >= new Date(Date.now() - parseInt(datePosted));
+    const matchesSalary = salary === '' || (job.salary_min <= salary && job.salary_max >= salary);
+
+    return matchesSearchTerm && matchesCategory && matchesJobType && matchesExperienceLevel && matchesDatePosted && matchesSalary;
+  });
 
   return (
     <div className="jobs-page">
@@ -130,15 +166,15 @@ const JobsPage = () => {
         <div className="filter-section">
           <h3>Category</h3>
           <div>
-            <input type="checkbox" id="commerce" name="category" value="commerce" />
+            <input type="checkbox" id="commerce" name="category" value="commerce" onChange={() => handleCategoryChange('commerce')} />
             <label htmlFor="commerce">Commerce</label>
           </div>
           <div>
-            <input type="checkbox" id="telecommunication" name="category" value="telecommunication" />
+            <input type="checkbox" id="telecommunication" name="category" value="telecommunication" onChange={() => handleCategoryChange('telecommunication')} />
             <label htmlFor="telecommunication">Telecommunication</label>
           </div>
           <div>
-            <input type="checkbox" id="education" name="category" value="education" />
+            <input type="checkbox" id="education" name="category" value="education" onChange={() => handleCategoryChange('education')} />
             <label htmlFor="education">Education</label>
           </div>
         </div>
@@ -146,30 +182,31 @@ const JobsPage = () => {
         <div className="filter-section">
           <h3>Job Type</h3>
           <div>
-            <input type="checkbox" id="fulltime" name="jobType" value="fulltime" />
+            <input type="checkbox" id="fulltime" name="jobType" value="fulltime" onChange={() => handleJobTypeChange('full-time')} />
             <label htmlFor="fulltime">Full-time</label>
           </div>
           <div>
-            <input type="checkbox" id="parttime" name="jobType" value="parttime" />
+            <input type="checkbox" id="parttime" name="jobType" value="parttime" onChange={() => handleJobTypeChange('part-time')} />
             <label htmlFor="parttime">Part-time</label>
           </div>
           <div>
-            <input type="checkbox" id="freelance" name="jobType" value="freelance" />
+            <input type="checkbox" id="freelance" name="jobType" value="freelance" onChange={() => handleJobTypeChange('freelance')} />
             <label htmlFor="freelance">Freelance</label>
           </div>
           <div>
-            <input type="checkbox" id="seasonal" name="jobType" value="seasonal" />
+            <input type="checkbox" id="seasonal" name="jobType" value="seasonal" onChange={() => handleJobTypeChange('seasonal')} />
             <label htmlFor="seasonal">Seasonal</label>
           </div>
           <div>
-            <input type="checkbox" id="fixedprice" name="jobType" value="fixedprice" />
+            <input type="checkbox" id="fixedprice" name="jobType" value="fixedprice" onChange={() => handleJobTypeChange('fixed-price')} />
             <label htmlFor="fixedprice">Fixed-price</label>
           </div>
         </div>
 
         <div className="filter-section">
           <h3>Experience Level</h3>
-          <select>
+          <select onChange={handleExperienceLevelChange}>
+            <option value="">All Levels</option>
             <option value="entry">Entry Level</option>
             <option value="mid">Mid Level</option>
             <option value="senior">Senior Level</option>
@@ -178,25 +215,23 @@ const JobsPage = () => {
 
         <div className="filter-section">
           <h3>Date Posted</h3>
-          <select>
-            <option value="last24hours">Last 24 hours</option>
-            <option value="last7days">Last 7 days</option>
-            <option value="last14days">Last 14 days</option>
-            <option value="last30days">Last 30 days</option>
-            <option value="ealier">Earlier</option>
+          <select onChange={handleDatePostedChange}>
+            <option value="">Anytime</option>
+            <option value="86400000">Last 24 hours</option>
+            <option value="604800000">Last 7 days</option>
+            <option value="1209600000">Last 14 days</option>
+            <option value="2592000000">Last 30 days</option>
           </select>
         </div>
 
         <div className="filter-section">
           <h3>Salary</h3>
           <input
-            type="range"
-            min="0"
-            max="2000000"
+            type="number"
+            placeholder="Enter salary"
             value={salary}
-            onChange={(e) => setSalary(e.target.value)}
+            onChange={handleSalaryChange}
           />
-          <div>Salary: ${salary}</div>
         </div>
       </div>
 
