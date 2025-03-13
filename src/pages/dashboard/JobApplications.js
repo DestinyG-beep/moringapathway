@@ -1,31 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/jobapplications.css';
-import axios from 'axios';
-import config from '../../config';
 
 const JobApplications = () => {
   const [applications, setApplications] = useState([]);
 
   useEffect(() => {
-    const fetchApplications = async () => {
-      try {
-        const response = await axios.get(`${config.backendUrl}/get_applications`);
-        setApplications(response.data);
-      } catch (error) {
-        console.error('Error fetching job applications:', error);
-      }
+    const fetchApplications = () => {
+      const appliedJobs = JSON.parse(localStorage.getItem('appliedJobs')) || [];
+      setApplications(appliedJobs);
     };
 
     fetchApplications();
   }, []);
 
-  const handleRemoveApplication = async (id) => {
-    try {
-      await axios.delete(`${config.backendUrl}/delete_application/${id}`);
-      setApplications(applications.filter(job => job.id !== id));
-    } catch (error) {
-      console.error('Error removing job application:', error);
-    }
+  const handleRemoveApplication = (id) => {
+    const updatedApplications = applications.filter(job => job.id !== id);
+    setApplications(updatedApplications);
+    localStorage.setItem('appliedJobs', JSON.stringify(updatedApplications));
   };
 
   return (
@@ -39,11 +30,11 @@ const JobApplications = () => {
         ) : (
           applications.map((application) => (
             <div key={application.id} className="application-card">
-              <h2>{application.job.title}</h2>
-              <p>{application.job.employer}</p>
-              <p>{application.job.location}</p>
-              <p>{application.job.job_type}</p>
-              <p>Date Applied: {new Date(application.application_date).toLocaleDateString()}</p>
+              <h2>{application.title}</h2>
+              <p>{application.employer}</p>
+              <p>{application.location}</p>
+              <p>{application.job_type}</p>
+              <p>Date Applied: {new Date(application.date_posted).toLocaleDateString()}</p>
               <button>View Details</button>
               <button onClick={() => handleRemoveApplication(application.id)}>Remove</button>
             </div>

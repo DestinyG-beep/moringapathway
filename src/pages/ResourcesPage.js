@@ -20,7 +20,7 @@ const ResourcesPage = () => {
       title: 'Resume Guide',
       description: 'A comprehensive guide to creating a professional resume.',
       type: 'guide',
-      url: '#',
+      url: "https://www.myperfectcoverletter.com/lp/mpcrwzlp07.aspx?utm_source=google&utm_medium=sem&utm_campaign=20498128053&utm_term=cover%20letter%20template&network=g&device=c&adposition=&adgroupid=152552290029&placement=&adid=671887239766&gad_source=1&gclid=EAIaIQobChMIi_3yyveGjAMVTV1yCh3rtByMEAAYASAAEgItU_D_BwE",
       isPremium: false,
     },
     {
@@ -28,7 +28,7 @@ const ResourcesPage = () => {
       title: 'Cover Letter Template',
       description: 'A template to help you write a compelling cover letter.',
       type: 'template',
-      url: '#',
+      url: "https://www.myperfectcoverletter.com/lp/mpcrwzlp07.aspx?utm_source=google&utm_medium=sem&utm_campaign=20498128053&utm_term=cover%20letter%20template&network=g&device=c&adposition=&adgroupid=152552290029&placement=&adid=671887239766&gad_source=1&gclid=EAIaIQobChMIi_3yyveGjAMVTV1yCh3rtByMEAAYASAAEgItU_D_BwE",
       isPremium: false,
     },
     {
@@ -36,7 +36,7 @@ const ResourcesPage = () => {
       title: 'Interview Questions',
       description: 'Common interview questions and model answers.',
       type: 'guide',
-      url: '#',
+      url: "https://www.brightermonday.co.ke/discover/how-to-answer-interview-questions?gad_source=1&gclid=EAIaIQobChMIuPPq1vSGjAMVmnJBAh0lDQdYEAAYAiAAEgIdbPD_BwE",
       isPremium: true,
     },
     {
@@ -44,7 +44,7 @@ const ResourcesPage = () => {
       title: 'Job Search Strategies',
       description: 'Effective strategies for finding job opportunities.',
       type: 'guide',
-      url: '#',
+      url: "https://www.linkedin.com/pulse/winning-job-search-strategy-dan-mian",
       isPremium: false,
     },
     {
@@ -52,7 +52,7 @@ const ResourcesPage = () => {
       title: 'Networking Tips',
       description: 'Tips for building and maintaining a professional network.',
       type: 'guide',
-      url: '#',
+      url: "https://www.wix.com/blog/networking-101-your-complete-guide-to-master-your-networking-skills?utm_source=google&utm_medium=cpc&utm_campaign=21355409421^161138662017^search%20-%20dsa&experiment_id=^^701645202217^&gad_source=1&gclid=EAIaIQobChMIwZWxjviGjAMVAz8GAB3Z-BBQEAAYAyAAEgLspPD_BwE",
       isPremium: true,
     },
     {
@@ -60,7 +60,7 @@ const ResourcesPage = () => {
       title: 'Salary Negotiation',
       description: 'Guidelines for negotiating your salary effectively.',
       type: 'guide',
-      url: '#',
+      url: "https://www.brightermonday.co.ke/discover/salary-negotiation?gad_source=1&gclid=EAIaIQobChMIguuOo_iGjAMVdwcGAB0pawqrEAAYAiAAEgLWGPD_BwE",
       isPremium: false,
     },
   ];

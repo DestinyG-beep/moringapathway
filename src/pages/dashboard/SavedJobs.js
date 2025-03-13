@@ -1,30 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import config from '../../config';
 
 const SavedJobs = () => {
   const [savedJobs, setSavedJobs] = useState([]);
 
   useEffect(() => {
-    const fetchSavedJobs = async () => {
-      try {
-        const response = await axios.get(`${config.backendUrl}/get_saved_jobs`);
-        setSavedJobs(response.data);
-      } catch (error) {
-        console.error('Error fetching saved jobs:', error);
-      }
+    const fetchSavedJobs = () => {
+      const savedJobs = JSON.parse(localStorage.getItem('savedJobs')) || [];
+      setSavedJobs(savedJobs);
     };
 
     fetchSavedJobs();
   }, []);
 
-  const handleRemoveJob = async (id) => {
-    try {
-      await axios.delete(`${config.backendUrl}/delete_saved_job/${id}`);
-      setSavedJobs(savedJobs.filter(job => job.id !== id));
-    } catch (error) {
-      console.error('Error removing saved job:', error);
-    }
+  const handleRemoveJob = (id) => {
+    const updatedSavedJobs = savedJobs.filter(job => job.id !== id);
+    setSavedJobs(updatedSavedJobs);
+    localStorage.setItem('savedJobs', JSON.stringify(updatedSavedJobs));
   };
 
   return (
